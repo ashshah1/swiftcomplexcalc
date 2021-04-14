@@ -4,6 +4,82 @@ print("Welcome back to the UW Calculator")
 // below both compile and return "true"
 class Calculator {
     
+    func add(lhs: Int, rhs: Int) -> Int {
+        return (lhs + rhs);
+    }
+    
+    // sum of the elements of an array
+    func add(_ args: [Int]) -> Int {
+        var sum = 0;
+        for n in args {
+            sum += n;
+        }
+        return sum;
+    }
+    
+    // add two points
+    func add(lhs: (Int, Int), rhs: (Int, Int)) -> (Int, Int) {
+        return (lhs.0 + rhs.0, lhs.1 + rhs.1)
+    }
+    
+    func add(lhs: [String: Int], rhs: [String: Int]) -> [String: Int] {
+        return ["x": lhs["x"]! + rhs["x"]!, "y": lhs["y"]! + rhs["y"]!]
+    }
+    
+    
+    func subtract(lhs: Int, rhs: Int) -> Int {
+        return (lhs - rhs);
+    }
+    
+    func subtract(lhs: (Int, Int), rhs: (Int, Int)) -> (Int, Int) {
+        return (lhs.0 - rhs.0, lhs.1 - rhs.1)
+    }
+    
+    func subtract(lhs: [String: Int], rhs: [String: Int]) -> [String: Int] {
+        return ["x": lhs["x"]! - rhs["x"]!, "y": lhs["y"]! - rhs["y"]!]
+    }
+    
+    
+    
+    func multiply(lhs: Int, rhs: Int) -> Int {
+        return (lhs * rhs);
+    }
+    
+    func multiply(_ args: [Int]) -> Int {
+        var product = 1;
+        for n in args {
+            product *= n;
+        }
+        return product;
+    }
+    
+    func divide(lhs: Int, rhs: Int) -> Int {
+        return (lhs / rhs);
+    }
+    
+    func mathOp(lhs: Int, rhs: Int, op: (Int, Int) -> Int) -> Int {
+        return op(lhs, rhs)
+    }
+    
+    func mathOp(args: [Int], beg: Int, op: (Int, Int) -> Int) -> Int {
+        var result = beg;
+        for n in args {
+            result = op(result, n)
+        }
+        return result;
+    }
+    
+    func count(_ args: [Int]) -> Int {
+        return args.count;
+    }
+    
+    func avg(_ args: [Int]) -> Int {
+        let sum = add(args);
+        let total = count(args);
+        return (sum / total);
+    }
+    
+
 }
 
 let calc = Calculator()  // Don't change this declaration name; it's used in all the tests below
@@ -17,7 +93,7 @@ calc.subtract(lhs: 2, rhs: 2) == 0
 calc.multiply(lhs: 2, rhs: 2) == 4
 calc.divide(lhs: 2, rhs: 2) == 1
 
-calc.mathOp(lhs: 5, rhs: 5, op: { (lhs: Int, rhs: Int) -> Int in (lhs + rjs) + (lhs * rhs) }) == 35
+calc.mathOp(lhs: 5, rhs: 5, op: { (lhs: Int, rhs: Int) -> Int in (lhs + rhs) + (lhs * rhs) }) == 35
     // This style is one way of writing an anonymous function
 calc.mathOp(lhs: 10, rhs: -5, op: { ($0 + $1) + ($0 - $1) }) == 20
     // This is the second, more terse, style; either works
